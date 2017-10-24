@@ -17,6 +17,8 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+    public $defaultAction = 'users';
+
     /**
      * @inheritdoc
      */
@@ -25,10 +27,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout', 'transaction', 'profile'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'transaction', 'profile'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
