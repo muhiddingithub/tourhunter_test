@@ -155,6 +155,21 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionProfile()
+    {
+        $userModel = Yii::$app->user->identity;
+        $find = Transactions::find()->where('sender_id = :s OR recipient_id = :r', [':s' => $userModel->id, ':r' => $userModel->id]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $find,
+            'pagination' => false,
+
+        ]);
+        return $this->render('profile', [
+            'userModel' => $userModel,
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
     /**
      * Logout action.
      *

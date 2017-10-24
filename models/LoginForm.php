@@ -38,7 +38,6 @@ class LoginForm extends Model
      */
     public function login()
     {
-        pre($this->getUser());
         return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
     }
 
