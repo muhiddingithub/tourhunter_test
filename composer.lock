@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9739656ad421421aaa049068321e39e4",
+    "content-hash": "94089d908415645c94caa140dd7a6c05",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -213,6 +213,91 @@
                 "html"
             ],
             "time": "2017-06-03T02:28:16+00:00"
+        },
+        {
+            "name": "muhiddingithub/yii2-autocomplete",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/muhiddingithub/yii2-autocomplete.git",
+                "reference": "837ba3f894a4418f125795c198700ece96a75c2b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/muhiddingithub/yii2-autocomplete/zipball/837ba3f894a4418f125795c198700ece96a75c2b",
+                "reference": "837ba3f894a4418f125795c198700ece96a75c2b",
+                "shasum": ""
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "muhiddin\\autocomplete\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muxiddin Jumaniyazov",
+                    "email": "hellomyhp@gmail.com"
+                }
+            ],
+            "description": "Multiple select element",
+            "keywords": [
+                "autocomplete",
+                "extension",
+                "jquery-ui",
+                "muhiddin",
+                "search",
+                "widget",
+                "yii2"
+            ],
+            "time": "2017-10-25 09:06:33"
+        },
+        {
+            "name": "muhiddingithub/yii2-multiple-select",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/muhiddingithub/yii2-multiple-select.git",
+                "reference": "bd08be1759ca8b8089e4705760fd33edeebf5566"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/muhiddingithub/yii2-multiple-select/zipball/bd08be1759ca8b8089e4705760fd33edeebf5566",
+                "reference": "bd08be1759ca8b8089e4705760fd33edeebf5566",
+                "shasum": ""
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "muhiddin\\select\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Muxiddin Jumaniyazov",
+                    "email": "hellomyhp@gmail.com"
+                }
+            ],
+            "description": "Multiple select element",
+            "keywords": [
+                "extension",
+                "jquery",
+                "muhiddin",
+                "multiple",
+                "multiple-select",
+                "select",
+                "widget",
+                "yii2"
+            ],
+            "time": "2017-10-25 07:29:27"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2988,7 +3073,10 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "muhiddingithub/yii2-autocomplete": 20,
+        "muhiddingithub/yii2-multiple-select": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

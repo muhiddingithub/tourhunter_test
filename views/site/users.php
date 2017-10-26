@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'template' => '{transaction}',
                     'buttons' => [
                         'transaction' => function ($url, $model) {
-                            return !Yii::$app->user->isGuest ? Html::a('Transaction', ['/site/transaction', 'recipient_id' => $model->id], [
+                            return !Yii::$app->user->isGuest ? Html::a('<i class="glyphicon glyphicon-plus"></i>Transaction', ['/site/transaction', 'recipient_id' => $model->id], [
                                 'title' => 'Transaction',
                                 'class' => 'btn btn-xs btn-outline btn-success add-tooltip / transaction-button'
                             ]) : '';
