@@ -12,7 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <div class="row">
         <h1 class="pull-left"><?= Html::encode($this->title) ?></h1>
-        <?= Html::a('<i class="glyphicon glyphicon-plus"></i>' . 'Transaction', ['transaction'], ['class' => 'btn btn-success / pull-right / transaction-button']) ?>
+        <?php
+        if (!Yii::$app->user->isGuest)
+            echo Html::a('<i class="glyphicon glyphicon-plus"></i>' . 'Transaction', ['transaction'], ['class' => 'btn btn-success / pull-right / transaction-button']) ?>
     </div>
     <p>You may transactions thay:</p>
 
