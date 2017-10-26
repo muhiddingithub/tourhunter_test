@@ -24,6 +24,10 @@ use yii\widgets\ActiveForm;
 
                 ]
             ]); ?>
+            <?php
+            if ($model->scenario == 'newUser')
+                echo $form->field($model, 'username')->textInput();
+            ?>
             <?= $form->field($model, 'cost')->textInput() ?>
             <?= Html::submitButton('Send', ['class' => 'btn btn-success']) ?>
             <?= Html::button('Close', ['class' => 'btn bnt-danger', 'data' => [

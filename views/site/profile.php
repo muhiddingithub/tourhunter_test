@@ -38,7 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return ($model->recipient_id == $userModel->id) ? "You" : $model->recipient->username;
                 }
             ],
-            'cost'
+            'cost',
+            [
+                'attribute' => 'create_dt',
+                'value' => function ($model) {
+                    return Yii::$app->formatter->asDatetime($model->created_dt, 'php:d.m.Y H:i');
+                }
+            ],
+
         ],
     ]);
     ?>

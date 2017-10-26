@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\TransactionForm;
 use app\models\Transactions;
 use app\models\Users;
 use Yii;
@@ -13,7 +14,6 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
@@ -54,22 +54,9 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
 
     /**
      * Login action.
@@ -85,17 +72,10 @@ class SiteController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) AND $model->validate()) {
             try {
-                $userModel = Users::findByUsername($model->username);
-                if ($userModel == null) {
-                    $userModel = new Users();
-                    $userModel->username = $model->username;
-                    if (!$userModel->save()) {
-                        throw new Exception('error create user');
-                    }
-                }
-                $res = $model->login();
-                if ($res)
+                Users::checkOrSignup($model->username);
+                if ($model->login())
                     return $this->redirect(['users']);
+
             } catch (Exception $e) {
             }
         }
@@ -120,33 +100,22 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionTransaction($recipient_id)
+    public function actionTransaction($recipient_id = null)
     {
-        $model = new Transactions();
+        $model = new TransactionForm();
+        if (is_null($recipient_id)) {
+            $model->scenario = 'newUser';
+        } else {
+            $model->scenario = 'hasUser';
+            $model->recipient_id = $recipient_id;
+        }
+
         if ($model->load(Yii::$app->request->post())) {
-            $transaction = Yii::$app->db->beginTransaction();
-            try {
-                $model->recipient_id = $recipient_id;
-                $model->sender_id = Yii::$app->user->id;
-                if (!$model->save()) {
-                    throw new Exception('error save model');
-                }
-                $recModel = $model->recipient;
-                $recModel->balance += $model->cost;
-                $senModel = $model->sender;
-                $senModel->balance -= $model->cost;
-                if (!$recModel->save(true, ['balance']))
-                    throw new Exception('error rec');
-
-                if (!$senModel->save(true, ['balance']))
-                    throw new Exception('error sen');
-
-                $transaction->commit();
+            if ($model->transaction()) {
                 echo json_encode([
-                    'status' => 'success']);
+                    'status' => 'success'
+                ]);
                 exit();
-            } catch (Exception $e) {
-                $transaction->rollBack();
             }
         }
         echo Json::encode([
@@ -164,6 +133,11 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $find,
             'pagination' => false,
+            'sort' => [
+                'defaultOrder' => [
+                    'created_dt' => SORT_DESC
+                ]
+            ]
 
         ]);
         return $this->render('profile', [

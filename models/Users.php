@@ -103,4 +103,17 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
         return 1;
     }
 
+    public static function checkOrSignup($username)
+    {
+        $userModel = Users::findByUsername($username);
+        if ($userModel == null) {
+            $userModel = new Users();
+            $userModel->username = $username;
+            $userModel->save();
+            return $userModel;
+        }
+        return $userModel;
+
+    }
+
 }

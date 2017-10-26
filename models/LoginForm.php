@@ -54,12 +54,7 @@ class LoginForm extends Model
 
         return $this->_user;
     }
+
+
 }
 
-function pre($data)
-{
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";
-    die();
-}

@@ -9,8 +9,10 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\assets\ViewAsset;
 
 AppAsset::register($this);
+ViewAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -35,13 +37,11 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $items = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
+    $items[] = ['label' => 'Users', 'url' => ['/site/users']];
     if (Yii::$app->user->isGuest) {
         $items[] = ['label' => 'Login/Register', 'url' => ['/site/login']];
     } else {
-        $items[] = ['label' => 'Users', 'url' => ['/site/users']];
+
         $items[] = [
             'label' => Yii::$app->user->identity->username,
             'items' => [

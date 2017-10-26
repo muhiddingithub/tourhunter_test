@@ -18,6 +18,8 @@ use Yii;
  */
 class Transactions extends \yii\db\ActiveRecord
 {
+    public $username;
+
     /**
      * @inheritdoc
      */
@@ -70,4 +72,10 @@ class Transactions extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Users::className(), ['id' => 'sender_id']);
     }
+
+    public function createTrans()
+    {
+
+    }
+
 }
